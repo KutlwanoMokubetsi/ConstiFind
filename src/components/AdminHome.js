@@ -16,6 +16,12 @@ const AdminHome = () => {
           <Typography variant="body1">{user.name}</Typography>
           <Button 
             variant="contained" 
+            sx={{ backgroundColor: '#000', color: '#fff', mr: 0.1 }}
+            >
+                Contact Us
+            </Button>
+          <Button 
+            variant="contained" 
             onClick={() => logout({ returnTo: window.location.origin })}
             sx={{ backgroundColor: '#000', color: '#fff' }}
           >
