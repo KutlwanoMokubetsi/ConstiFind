@@ -4,11 +4,14 @@ import Login from './components/Login';
 function App() {
   return (
     <Auth0Provider
-      domain={"dev-0guwahdjkljcq658.us.auth0.com"}
-      clientId={"BViyv7wTuGcwpJVyyPcWcyRcRjpmeHJL"}
+      domain={process.env.REACT_APP_AUTH0_DOMAIN}
+      clientId={process.env.REACT_APP_AUTH0_CLIENT_ID}
       authorizationParams={{
-        redirect_uri: window.location.origin
+        redirect_uri: window.location.origin,
+        audience: process.env.REACT_APP_AUTH0_AUDIENCE
       }}
+      cacheLocation="localstorage"
+      useRefreshTokens={true}
     >
       <Login />
     </Auth0Provider>
