@@ -17,7 +17,11 @@ const Login = () => {
             <Typography variant="body1">{user.name}</Typography>
             <Button 
               variant="contained" 
-              onClick={() => logout({ returnTo: window.location.origin })}
+              onClick={() => logout({ 
+                returnTo: process.env.NODE_ENV === 'development'
+                  ? 'http://localhost:3000'
+                  : 'https://brave-coast-0e6459d10.6.azurestaticapps.net'
+              })}
               sx={{ backgroundColor: '#000', color: '#fff' }}
             >
               Logout
