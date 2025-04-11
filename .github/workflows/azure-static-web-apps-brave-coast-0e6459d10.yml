@@ -33,8 +33,8 @@ jobs:
           output_location: "build" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
         env:
-          REACT_APP_AUTH0_DOMAIN: dev-0guwahdjkljcq658.us.auth0.com
-          REACT_APP_AUTH0_CLIENT_ID: BViyv7wTuGcwpJVyyPcWcyRcRjpmeHJL
+          REACT_APP_AUTH0_DOMAIN: ${{ secrets.REACT_APP_AUTH0_DOMAIN }}
+          REACT_APP_AUTH0_CLIENT_ID: ${{ secrets.REACT_APP_AUTH0_CLIENT_ID}}
 
 
   close_pull_request_job:
