@@ -1,0 +1,24 @@
+[
+    {
+      "id": 1,
+      "title": "Bill of Rights",
+      "summary": "First ten amendments to the United States Constitution.",
+      "country": "USA",
+      "year": 1791
+    },
+    {
+      "id": 2,
+      "title": "South African Constitution",
+      "summary": "Post-apartheid constitution promoting equality and human rights.",
+      "country": "South Africa",
+      "year": 1996
+    },
+    {
+      "id": 3,
+      "title": "French Declaration of the Rights of Man",
+      "summary": "French Revolution document on individual and collective rights.",
+      "country": "France",
+      "year": 1789
+    }
+  ]
+  

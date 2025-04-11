@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search - ConstiFind</title>
+    <link rel="stylesheet" href="search.css">
+</head>
+<body>
+    <main class="main">
+        <video autoplay muted loop class="video-bg">
+            <source src="4.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
+
+    <header class="navbar">
+        <section class="icon">
+            <h1 class="logo">ConstiFind</h1>
+        </section>
+
+        <nav class="menu">
+            <ul>
+                <li><a href="#">HOME</a></li>
+                <li><a href="#">ABOUT</a></li>
+                <li><a href="#">SERVICE</a></li>
+                <li><a href="#">CONTACT</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="content">
+            <header>
+                <h1>Search Constitutional Archive Data</h1>
+            </header>
+
+            <form class="search" role="search" method="GET" action="/search">
+                <input type="search" name="q" placeholder="Enter your query" required>
+                <button type="submit" class="btn">Search</button>
+            </form>
+
+            <aside class="results">
+                <h2>Search Results</h2>
+                <aside id="results-container">
+                    <!-- Results will be displayed here after backend query -->
+                    <p>No results yet. Please perform a search.</p>
+                </aside>
+            </aside>
+        </section>
+    </main>
+    <script>
+        // Wait until the page is fully loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get reference to form and results container
+            const form = document.querySelector('.search');
+            const resultsContainer = document.getElementById('results-container');
+        
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault(); // Prevent default form submission
+        
+                const query = form.q.value.trim(); // Get the value of the search input
+        
+                if (!query) {
+                    resultsContainer.innerHTML = '<p>Please enter a query.</p>';
+                    return;
+                }
+        
+                try {
+                    // Call your backend API with the query
+                    const response = await fetch(`http://localhost:3001/api/search?q=${encodeURIComponent(query)}`);
+                    const data = await response.json();
+        
+                    if (data.results.length === 0) {
+                        resultsContainer.innerHTML = '<p>No results found.</p>';
+                        return;
+                    }
+        
+                    // Clear previous results
+                    resultsContainer.innerHTML = '';
+        
+                    // Loop through results and add to DOM
+                    data.results.forEach(doc => {
+                        const article = document.createElement('article');
+                        article.classList.add('result-item');
+                        article.innerHTML = `
+                            <h3>${doc.title}</h3>
+                            <p><strong>Country:</strong> ${doc.country}</p>
+                            <p><strong>Year:</strong> ${doc.year}</p>
+                            <p>${doc.summary}</p>
+                            <hr>
+                            `;
+                        resultsContainer.appendChild(article);
+                    });
+        
+                } catch (error) {
+                    console.error('Error fetching results:', error);
+                    resultsContainer.innerHTML = '<p>Error retrieving search results. Please try again.</p>';
+                }
+            });
+        });
+        </script>
+        
+
+</body>
+</html>
