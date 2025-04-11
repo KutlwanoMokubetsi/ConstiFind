@@ -6,10 +6,10 @@ function Header() {
     <header>
       <nav>
         <ul>
-          <li><a href="#">Search</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Login</a></li>
-          <li><a href="#">Sign Up</a></li>
+          <li><a href="/search">Search</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/login">Login</a></li>
+          <li><a href="/signup">Sign Up</a></li>
         </ul>
       </nav>
     </header>
