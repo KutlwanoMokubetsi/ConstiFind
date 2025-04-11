@@ -38,11 +38,11 @@ const Login = () => {
       <Box sx={{ minHeight: "90vh", display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
         <Box component={'img'} src={logo} alt='logo' sx={{ width: '100px', height: '100px', mb: 2 }} />
         <Box>
-          <Typography variant='h4' sx={{ fontWeight: 'bold', mb: 2 }}>Welcome to ConstiFind</Typography>
+          <Typography variant='h4' sx={{ fontWeight: 'bold', mb: 2 }}>Welcome to ConstiFind Search</Typography>
         </Box>
 
-        <Box sx={{ display: 'flex', justifyContent: 'center', width: '60 %', px: 2, py: 2, borderRadius: '10px', border: '1px solid gray', backgroundColor: '#fff' }}>
-          <SearchIcon sx={{ color: '#000', fontSize: '2rem', mr: 1 }} />
+        <Box sx={{ display: 'flex', justifyContent: 'center', width: '90 %', px: 2, py: 2, borderRadius: '10px', border: '1px solid gray', backgroundColor: '#fff' }}>
+          <SearchIcon />
           <Box component={'input'} sx={{ border: 'none', "&:focus": { outline: 'none' }, flex: 1, fontSize: '17px' }} />
         </Box>
 
