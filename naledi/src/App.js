@@ -23,10 +23,11 @@ function Footer() {
     </footer>
   );
 }
+
 function App() {
   return (
     <>
-    
+    <Header />
     <main>
       <section className="search-container">
         <form>
@@ -59,6 +60,7 @@ function App() {
         </article>
       </section>
     </main>
+    <Footer />
     
   </>
 
