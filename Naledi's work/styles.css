@@ -78,6 +78,11 @@
     padding: 2rem 1rem;
     flex-wrap: wrap;
   }
+  .info-section > article {
+    flex: 1 1 calc(33.333% - 1.5rem); /* Adjust width for 3 cards per row */
+    max-width: calc(33.333% - 1.5rem); /* Prevent cards from exceeding this width */
+    box-sizing: border-box; /* Ensure padding and border are included in width */
+  }
   
   article {
     background-color: #f7f7f8;
