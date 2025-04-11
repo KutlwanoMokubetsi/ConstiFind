@@ -1,12 +1,12 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import { Box, Typography, Button, Avatar } from '@mui/material';
+import { Box, Typography, Button } from '@mui/material';
 import React from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import logo from './images/archive-icon.jpg';
 import AdminHome from './AdminHome';
 
 const Login = () => {
-  const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
 
   // If authenticated, render AdminHome component
   if (isAuthenticated) {
