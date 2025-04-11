@@ -1,17 +1,25 @@
-import { Auth0Provider } from '@auth0/auth0-react';
-import Login from './components/Login';
+// src/App.js
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import AdminPage from "./pages/AdminPage";
+import SearchPage from "./pages/SearchPage";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
-    <Auth0Provider
-      domain={"dev-0guwahdjkljcq658.us.auth0.com"}
-      clientId={"BViyv7wTuGcwpJVyyPcWcyRcRjpmeHJL"}
-      authorizationParams={{
-        redirect_uri: window.location.origin
-      }}
-    >
-      <Login />
-    </Auth0Provider>
+    <Router>
+      <div className="min-h-screen bg-gray-50 flex flex-col">
+        <Navbar />
+        <div className="flex-1 w-full"> {/* This will make content take remaining space */}
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/admin" element={<AdminPage />} />
+            <Route path="/search" element={<SearchPage />} />
+          </Routes>
+        </div>
+      </div>
+    </Router>
   );
 }
 
