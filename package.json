@@ -23,6 +23,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "prebuild": "echo 'Auth0 Domain: $REACT_APP_AUTH0_DOMAIN' && echo 'Client ID: $REACT_APP_AUTH0_CLIENT_ID'",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
