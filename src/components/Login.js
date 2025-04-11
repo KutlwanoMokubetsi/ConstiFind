@@ -41,9 +41,9 @@ const Login = () => {
           <Typography variant='h4' sx={{ fontWeight: 'bold', mb: 2 }}>Welcome to ConstiFind</Typography>
         </Box>
 
-        <Box sx={{ display: 'flex', justifyContent: 'center', width: '60%', px: 2, py: 2, borderRadius: '10px', border: '1px solid gray', backgroundColor: '#fff' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', width: '60 %', px: 2, py: 2, borderRadius: '10px', border: '1px solid gray', backgroundColor: '#fff' }}>
           <SearchIcon sx={{ color: '#000', fontSize: '2rem', mr: 1 }} />
-          <Box component={'input'} sx={{ border: 'none', "&:focus": { outline: 'none' }, flex: 1, fontSize: '18px' }} />
+          <Box component={'input'} sx={{ border: 'none', "&:focus": { outline: 'none' }, flex: 1, fontSize: '17px' }} />
         </Box>
 
         <Box>
