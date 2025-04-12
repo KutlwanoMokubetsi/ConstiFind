@@ -10,27 +10,70 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #fff;
-  color: #111;
+  background-image: url('./converted_image.jpg');
+  background-size: cover; /* Ensures the image covers the entire background */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat;
+  /* Keeps the image fixed during scroll */
+  color : #111;
 }
 
-/* Top Navigation */
-header nav ul {
-  list-style: none;
+.layout {
   display: flex;
-  justify-content: flex-end;
-  padding: 1rem 2rem;
-  gap: 1.5rem;
-  background-color: #fff;
-  border-bottom: 1px solid #eee;
 }
 
-header nav ul li a {
-  text-decoration: none;
-  color: #333;
-  font-weight: 500;
-  font-size: 0.95rem;
+.drawer {
+  width: 200px;
+  background-color: #f0f0f0;
+  padding-top: 20px;
+  height: 100vh;
+  position: fixed;
 }
+
+.drawer nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.drawer nav li {
+  margin: 20px;
+}
+
+.nav-btn {
+  display: inline-block;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-btn {
+  background-color: #4a90e2;
+  color: white;
+}
+
+.signup-btn {
+  background-color: #8e44ad;
+  color: white;
+}
+
+.main-content {
+  margin-left: 200px;
+  padding: 20px;
+}
+
+.gradient-btn {
+  background: linear-gradient(to right, #4a90e2, #8e44ad);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+
+
+
 
 /* Search Section */
 .search-container {
@@ -38,6 +81,7 @@ header nav ul li a {
   justify-content: center;
   align-items: center;
   padding: 3rem 1rem;
+  margin-bottom: 40px;
 }
 
 .search-container form {
@@ -80,7 +124,8 @@ form button:hover {
 info-section > article {
   flex: 1 1 calc(33.333% - 1.5rem); /* Adjust width for 3 cards per row */
   max-width: calc(33.333% - 1.5rem); /* Prevent cards from exceeding this width */
-  box-sizing: border-box; /* Ensure padding and border are included in width */
+  box-sizing: border-box;
+  margin-bottom: 20px; /* Ensure padding and border are included in width */
 }
 article {
   background-color: #f7f7f8;
@@ -101,18 +146,3 @@ article p {
   color: #444;
 }
 
-/* Footer */
-footer {
-  text-align: center;
-  padding: 1rem;
-  background-color: #fafafa;
-  border-top: 1px solid #eee;
-  font-size: 0.9rem;
-  margin-top: auto;
-}
-
-footer a {
-  color: #666;
-  text-decoration: none;
-  margin: 0 0.5rem;
-}

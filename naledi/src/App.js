@@ -1,28 +1,22 @@
 
 import './App.css';
 
-function Header() {
+
+function Drawer() {
   return (
-    <header>
+    <aside className="drawer">
       <nav>
         <ul>
           <li><a href="/search">Search</a></li>
           <li><a href="/about">About</a></li>
-          <li><a href="/login">Login</a></li>
-          <li><a href="/signup">Sign Up</a></li>
+          <li><button className="nav-btn login-btn">Login</button></li>
+          <li><button className="nav-btn signup-btn">Sign Up</button></li>
         </ul>
       </nav>
-    </header>
+    </aside>
   );
 }
-function Footer() {
-  return (
-    <footer>
-      <p>&copy; 2023 Naledi. All rights reserved.</p>
-      <p>Privacy Policy | Terms of Service</p>
-    </footer>
-  );
-}
+
 
 function App() {
   return (
@@ -36,7 +30,7 @@ function App() {
             placeholder="Ask anything..."
             className="search-bar"
           />
-          <button type="submit">Go</button>
+          <button type="submit" className="gradient-btn">Go</button>
         </form>
       </section>
       <section className="info-section">
@@ -59,8 +53,7 @@ function App() {
           <p>Chat in natural language—no tech jargon needed.</p>
         </article>
       </section>
-    </main>
-    <Footer />
+    </main> 
     
   </>
 
