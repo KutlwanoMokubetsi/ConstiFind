@@ -6,16 +6,11 @@
 }
 
 body {
-  font-family: "Helvetica Neue", sans-serif;
-  display: flex;
-  flex-direction: column;
+  font-family: "Arial", sans-serif;
+  background-color: rgb(245, 241, 241);
   min-height: 100vh;
-  background-image: url('./converted_image.jpg');
-  background-size: cover; /* Ensures the image covers the entire background */
-  background-position: center; /* Centers the image */
-  background-repeat: no-repeat;
-  /* Keeps the image fixed during scroll */
-  color : #111;
+  color : black;
+  margin : 0;
 }
 
 .layout {
@@ -23,112 +18,185 @@ body {
 }
 
 .drawer {
-  width: 200px;
-  background-color: #f0f0f0;
-  padding-top: 20px;
+  width: 250px;
+  background-color: #e3dede;
+  padding: 1rem 0;
   height: 100vh;
   position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: #d3cfcf solid 1px;
+  border-radius: 10px;
+}
+
+.drawer nav {
+  flex: 1;
 }
 
 .drawer nav ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
-.drawer nav li {
-  margin: 20px;
+.drawer nav ul li {
+  margin: 1rem 0;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.drawer nav ul li a {
+  color: black;
+  text-decoration: none; 
+  font-size: 1.1rem;
+}
+
+.drawer nav ul li a:hover {
+  text-decoration: underline;
+}
+
+.brand-header {
+  font-family: cursive;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  padding: 1rem 0;
+  font-size: 1.5rem;
+  font-weight: bolder;
+  color: black;
+  text-align: center;
+
+}
+
+.logo {
+  height: 50px;
+  width: 50px;
+  margin-left: 0.5rem;
+  
 }
 
 .nav-btn {
-  display: inline-block;
-  padding: 10px 15px;
+  font-family: cursive;
+  background: linear-gradient(to right, #4a90e2, #8e44ad);;
+  color:black;
   border: none;
-  border-radius: 5px;
+  padding: 0.75rem;
+  width: 80%;
+  margin: 0.5rem auto;
   cursor: pointer;
+  border-radius: 5px;
+  font-size: 1.3rem;
 }
 
-.login-btn {
-  background-color: #4a90e2;
-  color: white;
+.drawer ul.bottom-buttons {
+  position: absolute;
+  bottom: 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.signup-btn {
-  background-color: #8e44ad;
-  color: white;
+.nav-btn:hover {
+  background-color: #333;
 }
 
-.main-content {
-  margin-left: 200px;
-  padding: 20px;
+.drawer nav {
+  flex-grow: 1;
+}
+
+.drawer ul:last-child {
+  margin-bottom: 1rem;
+}
+
+/* Main content shifted because of fixed drawer */
+main {
+  margin-left: 250px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .gradient-btn {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 0.8rem; 
+  font-weight: bold;
   background: linear-gradient(to right, #4a90e2, #8e44ad);
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 6px;
+  color: black;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
-
-
-
-
-/* Search Section */
 .search-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 3rem 1rem;
-  margin-bottom: 40px;
+  margin-top: 15rem;
+  width: 100%;
+
+}
+
+.search-bar {
+  padding: 3rem;
+  width: 100%;
+  border-radius: 30px;
+  border: none;
+  font-size: 1rem;
+  background-color: rgb(245, 241, 241);;
+  color: black;
+  box-shadow: #676565 0px 0px 5px;
 }
 
 .search-container form {
   display: flex;
+  position: relative;
   gap: 0.5rem;
   width: 100%;
-  max-width: 600px;
+  max-width: 800px;
+  justify-content: center; /* This centers vertically */
 }
 
-.search-bar {
-  flex-grow: 1;
-  padding: 0.8rem 1rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
+.gradient-btn:hover {
+  opacity: 0.9;
+}
+
+.info-section article {
+  background: #e3dede;
+  padding: 1rem;
   border-radius: 8px;
+
 }
 
-form button {
-  padding: 0.8rem 1.2rem;
-  font-size: 1rem;
-  background-color: #111;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-form button:hover {
-  background-color: #333;
-}
-
-/* Info Section (horizontal cards) */
 .info-section {
   display: flex;
   justify-content: center;
-  gap: 1.5rem;
-  padding: 2rem 1rem;
-  flex-wrap: wrap; /* wraps on smaller screens */
+  gap: 2rem;
+  padding: 0.75rem;
+  flex-wrap: wrap;
+  width: 100%;
+  border-radius: 5px;
+  font-size: 1rem;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 1rem;
 }
-info-section > article {
-  flex: 1 1 calc(33.333% - 1.5rem); /* Adjust width for 3 cards per row */
-  max-width: calc(33.333% - 1.5rem); /* Prevent cards from exceeding this width */
-  box-sizing: border-box;
-  margin-bottom: 20px; /* Ensure padding and border are included in width */
-}
+
+
 article {
-  background-color: #f7f7f8;
+  background-color: white;
   padding: 1.5rem;
   border-radius: 16px;
   width: 300px;
@@ -142,7 +210,53 @@ article h2 {
 }
 
 article p {
-  font-size: 1rem;
-  color: #444;
+  font-size: 1.2rem;
+  color: #6b6868;
 }
 
+.search-label {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+  color: inherit
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #211e1e;
+    color: rgb(206, 205, 205);
+  }
+
+  .drawer {
+    background-color: #252222;
+    border: #373636 solid 1px;
+  }
+
+  .drawer nav ul li a{
+    color: rgb(245, 241, 241);
+  }
+
+  .nav-btn,
+  .gradient-btn {
+    background: linear-gradient(to right, #4a90e2, #8e44ad);
+    color: white;
+    border: none;
+  }
+
+  .search-bar {
+    background-color: #222;
+    color: white;
+  }
+
+  .info-section article {
+    background-color: #252222;
+    color: rgb(206, 205, 205);
+  }
+
+  a {
+    color: inherit;
+  }
+
+  .brand-header {
+    color: white;
+  }
+}

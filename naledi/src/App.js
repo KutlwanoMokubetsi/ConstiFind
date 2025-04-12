@@ -5,10 +5,16 @@ import './App.css';
 function Drawer() {
   return (
     <aside className="drawer">
+      <header className="brand-header">
+        <img src="/book.png" alt="logo" className="logo" />
+        <span className="brand-text">Constitutional Archive</span>
+      </header>
       <nav>
         <ul>
           <li><a href="/search">Search</a></li>
           <li><a href="/about">About</a></li>
+        </ul>
+        <ul className="bottom-buttons">
           <li><button className="nav-btn login-btn">Login</button></li>
           <li><button className="nav-btn signup-btn">Sign Up</button></li>
         </ul>
@@ -21,9 +27,10 @@ function Drawer() {
 function App() {
   return (
     <>
-    <Header />
+    <Drawer />
     <main>
       <section className="search-container">
+      <h1 className="search-label">What do you want to download?</h1>
         <form>
           <input
             type="text"
