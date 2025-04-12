@@ -10,9 +10,15 @@ function Drawer() {
         <span className="brand-text">Constitutional Archive</span>
       </header>
       <nav>
-        <ul>
-          <li><a href="/search">Search</a></li>
-          <li><a href="/about">About</a></li>
+        <ul className="info-buttons">
+          <li><a href="/search">
+          <img src="/history.png" alt="History Icon" className="nav-icon" />
+          History
+          </a></li>
+          <li><a href="/about">
+          <img src="/information.png" alt="History Icon" className="nav-icon" />
+          About
+          </a></li>
         </ul>
         <ul className="bottom-buttons">
           <li><button className="nav-btn login-btn">Login</button></li>
