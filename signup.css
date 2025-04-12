@@ -83,7 +83,7 @@ ul li a:hover {
     opacity: 0;
     transform: translateY(-50px);  /* Start above the screen */
     
-    animation: formAnimation 1.5s ease-out forwards;  /* Apply the animation */
+    animation: formAnimation 3s ease-out forwards;  /* Apply the animation */
 }
 
 .form h2 {
