@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Search, BookOpen, Upload, Menu, X } from 'lucide-react';
+import { Search, BookOpen, Upload, Menu, X, Code } from 'lucide-react';
 
 const Navbar = () => {
   const location = useLocation();
@@ -37,6 +37,10 @@ const Navbar = () => {
           <Link to="/admin" className={linkClasses('/admin')}>
             <Upload className="h-4 w-4 mr-2" />
             Admin
+          </Link>
+          <Link to="/api-docs" className={linkClasses('/api-docs')}>
+            <Code className="h-4 w-4 mr-2" />
+            API Docs
           </Link>
         </nav>
 
@@ -83,6 +87,16 @@ const Navbar = () => {
             <p className="flex items-center">
               <Upload className="h-4 w-4 mr-2" />
               Admin
+            </p>
+          </Link>
+          <Link
+            to="/api-docs"
+            className={mobileLinkClasses('/api-docs')}
+            onClick={() => setIsOpen(false)}
+          >
+            <p className="flex items-center">
+              <Code className="h-4 w-4 mr-2" />
+              API Docs
             </p>
           </Link>
         </nav>

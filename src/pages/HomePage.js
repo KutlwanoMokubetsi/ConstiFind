@@ -60,20 +60,28 @@ const HomePage = () => {
               </header>
             </article>
           </li>
-
-          <li className="pt-6">
-            <article className="flow-root bg-white rounded-lg px-6 pb-8">
-              <header className="-mt-6">
-                <figure className="inline-flex items-center justify-center p-3 bg-blue-500 rounded-md shadow-lg">
-                  <Code className="h-6 w-6 text-white" />
-                </figure>
-                <h2 className="mt-8 text-lg font-medium text-gray-900 tracking-tight">API Access</h2>
-                <p className="mt-5 text-base text-gray-500">
-                  RESTful API integration for developers to build upon our platform.
-                </p>
-              </header>
-            </article>
-          </li>
+ <li className="pt-6">
+  <article className="flow-root bg-white rounded-lg px-6 pb-8">
+    <header className="-mt-6">
+      <figure className="inline-flex items-center justify-center p-3 bg-blue-500 rounded-md shadow-lg">
+        <Code className="h-6 w-6 text-white" />
+      </figure>
+      <h2 className="mt-8 text-lg font-medium text-gray-900 tracking-tight">API Access</h2>
+      <p className="mt-5 text-base text-gray-500">
+        RESTful API integration for developers to build upon our platform.
+      </p>
+      <nav className="mt-4">
+        <Link
+          to="/api-docs"
+          className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700"
+        >
+          View API Documentation
+        </Link>
+      </nav>
+    </header>
+  </article>
+</li>
+          
         </ul>
       </section>
     </main>

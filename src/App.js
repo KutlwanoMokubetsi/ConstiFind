@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import AdminPage from "./pages/AdminPage";
 import SearchPage from "./pages/SearchPage";
 import Navbar from "./components/Navbar";
+import APIDocumentation from "./pages/APIDocumentation";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/admin" element={<AdminPage />} />
             <Route path="/search" element={<SearchPage />} />
+            <Route path="/api-docs" element={<APIDocumentation />} />
           </Routes>
         </div>
       </div>
