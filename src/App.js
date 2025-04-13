@@ -10,7 +10,7 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen bg-gray-50 flex flex-col">
-        <Navbar />
+        {/* <Navbar /> */}
         <div className="flex-1 w-full"> {/* This will make content take remaining space */}
           <Routes>
             <Route path="/" element={<HomePage />} />
