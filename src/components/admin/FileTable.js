@@ -3,38 +3,38 @@ import { Edit, Trash2, FolderTree } from 'lucide-react';
 
 const FileTable = ({ files, onEdit, onDelete }) => {
   return (
-    <div className="overflow-x-auto">
+    <figure className="overflow-x-auto">
       <table className="min-w-full divide-y divide-gray-200">
         <thead className="bg-gray-50">
           <tr>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Path</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Size</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Upload Date</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
+            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
+            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Path</th>
+            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Size</th>
+            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Upload Date</th>
+            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
           {files.map((file) => (
             <tr key={file.id}>
               <td className="px-6 py-4 whitespace-nowrap">
-                <div className="flex items-center">
+                <figure className="flex items-center">
                   <FolderTree className="h-5 w-5 text-gray-400 mr-2" />
-                  <div>
-                    <div className="text-sm font-medium text-gray-900">{file.name}</div>
+                  <figcaption>
+                    <p className="text-sm font-medium text-gray-900">{file.name}</p>
                     {file.tags && (
-                      <div className="text-sm text-gray-500">
+                      <p className="text-sm text-gray-500">
                         {file.tags.map((tag, index) => (
-                          <span key={index} className="mr-2 px-2 py-0.5 bg-gray-100 rounded-full text-xs">
+                          <mark key={index} className="mr-2 px-2 py-0.5 bg-gray-100 rounded-full text-xs">
                             {tag}
-                          </span>
+                          </mark>
                         ))}
-                      </div>
+                      </p>
                     )}
-                  </div>
-                </div>
+                  </figcaption>
+                </figure>
               </td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{file.type}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{file.category || '-'}</td>
@@ -59,7 +59,7 @@ const FileTable = ({ files, onEdit, onDelete }) => {
           ))}
         </tbody>
       </table>
-    </div>
+    </figure>
   );
 };
 

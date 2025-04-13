@@ -37,18 +37,18 @@ const EditMetadataModal = ({ file, onClose, onSave }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg p-6 max-w-2xl w-full mx-4">
-        <div className="flex justify-between items-center mb-6">
+    <dialog open className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <article className="bg-white rounded-lg p-6 max-w-2xl w-full mx-4">
+        <header className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-semibold">Edit File Metadata</h2>
           <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
             <X className="h-5 w-5" />
           </button>
-        </div>
+        </header>
         <form onSubmit={handleSubmit}>
-          <div className="grid grid-cols-1 gap-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700">File Name*</label>
+          <fieldset className="grid grid-cols-1 gap-6">
+            <label className="block">
+              <p className="text-sm font-medium text-gray-700">File Name*</p>
               <input
                 type="text"
                 value={metadata.name}
@@ -56,9 +56,10 @@ const EditMetadataModal = ({ file, onClose, onSave }) => {
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 required
               />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Category*</label>
+            </label>
+
+            <label className="block">
+              <p className="text-sm font-medium text-gray-700">Category*</p>
               <select
                 value={metadata.category}
                 onChange={(e) => setMetadata({...metadata, category: e.target.value})}
@@ -71,9 +72,10 @@ const EditMetadataModal = ({ file, onClose, onSave }) => {
                 <option value="historical">Historical Document</option>
                 <option value="legal">Legal Analysis</option>
               </select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Directory Path</label>
+            </label>
+
+            <label className="block">
+              <p className="text-sm font-medium text-gray-700">Directory Path</p>
               <input
                 type="text"
                 value={metadata.path}
@@ -81,18 +83,20 @@ const EditMetadataModal = ({ file, onClose, onSave }) => {
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 placeholder="/constitutional/amendments"
               />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Description</label>
+            </label>
+
+            <label className="block">
+              <p className="text-sm font-medium text-gray-700">Description</p>
               <textarea
                 value={metadata.description}
                 onChange={(e) => setMetadata({...metadata, description: e.target.value})}
                 rows={3}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Tags (comma-separated)</label>
+            </label>
+
+            <label className="block">
+              <p className="text-sm font-medium text-gray-700">Tags (comma-separated)</p>
               <input
                 type="text"
                 value={metadata.tags}
@@ -100,9 +104,9 @@ const EditMetadataModal = ({ file, onClose, onSave }) => {
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 placeholder="constitution, amendment, historical"
               />
-            </div>
-          </div>
-          <div className="mt-6 flex justify-end space-x-3">
+            </label>
+          </fieldset>
+          <footer className="mt-6 flex justify-end space-x-3">
             <button
               type="button"
               onClick={onClose}
@@ -116,10 +120,10 @@ const EditMetadataModal = ({ file, onClose, onSave }) => {
             >
               Save Changes
             </button>
-          </div>
+          </footer>
         </form>
-      </div>
-    </div>
+      </article>
+    </dialog>
   );
 };
 
