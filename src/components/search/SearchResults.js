@@ -1,11 +1,15 @@
+import React, { memo } from 'react';
 import SearchResultItem from './SearchResultItem';
 import Filters from './Filters';
 
 const SearchResults = ({ searchQuery, results }) => {
   return (
     <section className="max-w-4xl mx-auto">
-      <header className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-semibold text-gray-900">Search Results for "{searchQuery}"</h2>
+      <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+        <h2 className="text-2xl font-semibold text-gray-900">
+          Search Results for "{searchQuery}"
+        </h2>
+        {/* Filters are mock-only - will connect to real data later */}
         <Filters />
       </header>
 
@@ -24,4 +28,4 @@ const SearchResults = ({ searchQuery, results }) => {
   );
 };
 
-export default SearchResults;
+export default memo(SearchResults);
