@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Upload, FolderTree, Edit, AlertCircle, X } from 'lucide-react';
+import { Upload, FolderTree, Edit, AlertCircle, X, Trash2 } from 'lucide-react';
 
 const FileUpload = ({ onFileSelect }) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -69,6 +69,20 @@ const FileUpload = ({ onFileSelect }) => {
     setSelectedFiles([]);
   };
 
+  // New function to handle file deletion
+  const handleFileDelete = (index) => {
+    const updatedFiles = [...selectedFiles];
+    updatedFiles.splice(index, 1);
+    setSelectedFiles(updatedFiles);
+    // If we're deleting the file that's currently being edited, close the editor
+    if (editingFileIndex === index) {
+      setEditingFileIndex(null);
+    } else if (editingFileIndex > index) {
+      // Adjust the editing index if needed
+      setEditingFileIndex(editingFileIndex - 1);
+    }
+  };
+
   const allFilesValid = selectedFiles.length > 0 && selectedFiles.every(file => file.isValid);
 
   return (
@@ -132,20 +146,30 @@ const FileUpload = ({ onFileSelect }) => {
                       </p>
                     )}
                   </section>
-                  <button
-                    onClick={() => setEditingFileIndex(index === editingFileIndex ? null : index)}
-                    className={`p-2 rounded-full ${
-                      !item.isValid 
-                        ? 'text-amber-600 hover:bg-amber-100' 
-                        : 'text-indigo-600 hover:bg-indigo-50'
-                    } transition-colors duration-200`}
-                  >
-                    {editingFileIndex === index ? (
-                      <X className="h-5 w-5" />
-                    ) : (
-                      <Edit className="h-5 w-5" />
-                    )}
-                  </button>
+                  <div className="flex space-x-2">
+                    <button
+                      onClick={() => handleFileDelete(index)}
+                      className="p-2 rounded-full text-rose-600 hover:bg-rose-50 transition-colors duration-200"
+                      aria-label="Delete file"
+                    >
+                      <Trash2 className="h-5 w-5" />
+                    </button>
+                    <button
+                      onClick={() => setEditingFileIndex(index === editingFileIndex ? null : index)}
+                      className={`p-2 rounded-full ${
+                        !item.isValid 
+                          ? 'text-amber-600 hover:bg-amber-100' 
+                          : 'text-indigo-600 hover:bg-indigo-50'
+                      } transition-colors duration-200`}
+                      aria-label="Edit metadata"
+                    >
+                      {editingFileIndex === index ? (
+                        <X className="h-5 w-5" />
+                      ) : (
+                        <Edit className="h-5 w-5" />
+                      )}
+                    </button>
+                  </div>
                 </header>
 
                 {editingFileIndex === index && (
