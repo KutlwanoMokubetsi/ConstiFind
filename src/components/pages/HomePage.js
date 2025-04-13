@@ -7,8 +7,7 @@ import {
   Typography,
   Grid,
   Paper,
-  Button,
-  Stack,
+  Button
 } from '@mui/material';
 
 const HomePage = () => {
