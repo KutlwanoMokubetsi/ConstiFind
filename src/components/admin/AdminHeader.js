@@ -3,7 +3,7 @@ import { LogOut } from 'lucide-react';
 
 const AdminHeader = ({ onSignOut }) => {
   return (
-    <div className="flex justify-between items-center mb-8">
+    <header className="flex justify-between items-center mb-8">
       <h1 className="text-2xl font-bold text-gray-900">Admin Portal</h1>
       <button
         onClick={onSignOut}
@@ -12,7 +12,7 @@ const AdminHeader = ({ onSignOut }) => {
         <LogOut className="h-4 w-4 mr-2" />
         Sign Out
       </button>
-    </div>
+    </header>
   );
 };
 

@@ -72,13 +72,13 @@ const FileUpload = ({ onFileSelect }) => {
   const allFilesValid = selectedFiles.length > 0 && selectedFiles.every(file => file.isValid);
 
   return (
-    <div className="mb-8">
-      <div
+    <section className="mb-8">
+      <article
         className="border-2 border-dashed border-slate-200 rounded-xl p-8 text-center bg-slate-50 hover:bg-slate-100 transition-colors duration-200"
         onDrop={handleDrop}
         onDragOver={handleDragOver}
       >
-        <div className="flex flex-col items-center">
+        <figure className="flex flex-col items-center">
           <FolderTree className="h-12 w-12 text-indigo-500 mb-4" />
           <input
             type="file"
@@ -94,34 +94,34 @@ const FileUpload = ({ onFileSelect }) => {
             <Upload className="h-5 w-5 mr-2" />
             Select Files
           </label>
-          <p className="text-sm text-slate-500 mb-2">
+          <figcaption className="text-sm text-slate-500 mb-2">
             Drag and drop files here, or click to browse
-          </p>
-        </div>
-      </div>
+          </figcaption>
+        </figure>
+      </article>
 
       {selectedFiles.length > 0 && (
-        <div className="mt-8 space-y-4">
+        <article className="mt-8 space-y-4">
           <h3 className="text-lg font-semibold text-slate-800">Files to Upload</h3>
           
           {!allFilesValid && (
-            <div className="flex items-center p-3 bg-amber-50 rounded-lg text-amber-800 border border-amber-100">
+            <aside className="flex items-center p-3 bg-amber-50 rounded-lg text-amber-800 border border-amber-100">
               <AlertCircle className="h-5 w-5 mr-2 flex-shrink-0" />
-              <span>Please complete all metadata fields before uploading</span>
-            </div>
+              <p>Please complete all metadata fields before uploading</p>
+            </aside>
           )}
 
-          <div className="space-y-4">
+          <ul className="space-y-4">
             {selectedFiles.map((item, index) => (
-              <div 
+              <li 
                 key={index} 
                 className={`border rounded-xl p-4 transition-all duration-200 ${
                   !item.isValid ? 'border-amber-200 bg-amber-50' : 'border-slate-200 bg-white'
                 } ${editingFileIndex === index ? 'ring-2 ring-indigo-500' : ''}`}
               >
-                <div className="flex justify-between items-start">
-                  <div className="min-w-0">
-                    <p className="font-medium text-slate-800 truncate">{item.file.name}</p>
+                <header className="flex justify-between items-start">
+                  <section className="min-w-0">
+                    <h4 className="font-medium text-slate-800 truncate">{item.file.name}</h4>
                     <p className="text-sm text-slate-500 mt-1">
                       {(item.file.size / (1024 * 1024)).toFixed(2)} MB
                     </p>
@@ -131,7 +131,7 @@ const FileUpload = ({ onFileSelect }) => {
                         <span>Metadata incomplete</span>
                       </p>
                     )}
-                  </div>
+                  </section>
                   <button
                     onClick={() => setEditingFileIndex(index === editingFileIndex ? null : index)}
                     className={`p-2 rounded-full ${
@@ -146,16 +146,17 @@ const FileUpload = ({ onFileSelect }) => {
                       <Edit className="h-5 w-5" />
                     )}
                   </button>
-                </div>
+                </header>
 
                 {editingFileIndex === index && (
-                  <div className="mt-4 space-y-4 p-4 bg-slate-50 rounded-lg border border-slate-100">
-                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  <section className="mt-4 space-y-4 p-4 bg-slate-50 rounded-lg border border-slate-100">
+                    <fieldset className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                       <div>
-                        <label className="block text-sm font-medium text-slate-700 mb-1">
+                        <label htmlFor={`name-${index}`} className="block text-sm font-medium text-slate-700 mb-1">
                           Display Name <span className="text-rose-500">*</span>
                         </label>
                         <input
+                          id={`name-${index}`}
                           type="text"
                           value={item.metadata.name}
                           onChange={(e) => handleMetadataChange(index, 'name', e.target.value)}
@@ -165,10 +166,11 @@ const FileUpload = ({ onFileSelect }) => {
                       </div>
                       
                       <div>
-                        <label className="block text-sm font-medium text-slate-700 mb-1">
+                        <label htmlFor={`category-${index}`} className="block text-sm font-medium text-slate-700 mb-1">
                           Category <span className="text-rose-500">*</span>
                         </label>
                         <select
+                          id={`category-${index}`}
                           value={item.metadata.category}
                           onChange={(e) => handleMetadataChange(index, 'category', e.target.value)}
                           className="block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm p-2.5"
@@ -180,13 +182,14 @@ const FileUpload = ({ onFileSelect }) => {
                           <option value="legal">Legal Document</option>
                         </select>
                       </div>
-                    </div>
+                    </fieldset>
 
                     <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-1">
+                      <label htmlFor={`description-${index}`} className="block text-sm font-medium text-slate-700 mb-1">
                         Description <span className="text-rose-500">*</span>
                       </label>
                       <textarea
+                        id={`description-${index}`}
                         value={item.metadata.description}
                         onChange={(e) => handleMetadataChange(index, 'description', e.target.value)}
                         rows={3}
@@ -196,11 +199,12 @@ const FileUpload = ({ onFileSelect }) => {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-1">
+                      <label htmlFor={`tags-${index}`} className="block text-sm font-medium text-slate-700 mb-1">
                         Tags <span className="text-rose-500">*</span> 
-                        <span className="text-slate-400 text-xs ml-2">(comma separated)</span>
+                        <em className="text-slate-400 text-xs ml-2">(comma separated)</em>
                       </label>
                       <input
+                        id={`tags-${index}`}
                         type="text"
                         value={item.metadata.tags.join(', ')}
                         onChange={(e) => handleMetadataChange(index, 'tags', e.target.value.split(',').map(t => t.trim()))}
@@ -209,7 +213,7 @@ const FileUpload = ({ onFileSelect }) => {
                       />
                     </div>
 
-                    <div className="flex justify-end space-x-3 pt-2">
+                    <footer className="flex justify-end space-x-3 pt-2">
                       <button
                         type="button"
                         onClick={() => setEditingFileIndex(null)}
@@ -224,12 +228,12 @@ const FileUpload = ({ onFileSelect }) => {
                       >
                         Save Changes
                       </button>
-                    </div>
-                  </div>
+                    </footer>
+                  </section>
                 )}
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
 
           <button
             onClick={handleUpload}
@@ -249,9 +253,9 @@ const FileUpload = ({ onFileSelect }) => {
               'Complete all metadata to enable upload'
             )}
           </button>
-        </div>
+        </article>
       )}
-    </div>
+    </section>
   );
 };
 
