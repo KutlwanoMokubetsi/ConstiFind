@@ -18,7 +18,7 @@ function App() {
       cacheLocation="localstorage"
       useRefreshTokens={true}
     >
-      <Router>
+      <Router basename='/'>
         <Navbar />
         <Routes>
           <Route path="/" element={<Homepage />} />
