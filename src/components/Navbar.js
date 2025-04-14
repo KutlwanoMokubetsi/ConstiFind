@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Search, BookOpen, Upload, Menu, X, Code } from 'lucide-react';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const Navbar = () => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
 
   const linkClasses = (path) =>
     `flex items-center px-4 py-2 text-sm font-medium rounded-md ${
@@ -24,7 +26,7 @@ const Navbar = () => {
     <nav className="bg-white border-b border-gray-200 shadow-sm w-full">
       <header className="px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between mx-auto w-full">
         <h1 className="text-xl font-bold text-gray-800">Constitution Archive</h1>
-        
+
         <nav className="hidden md:flex space-x-4">
           <Link to="/" className={linkClasses('/')}>
             <BookOpen className="h-4 w-4 mr-2" />
@@ -34,14 +36,24 @@ const Navbar = () => {
             <Search className="h-4 w-4 mr-2" />
             Search
           </Link>
-          <Link to="/admin" className={linkClasses('/admin')}>
-            <Upload className="h-4 w-4 mr-2" />
-            Admin
-          </Link>
           <Link to="/api-docs" className={linkClasses('/api-docs')}>
             <Code className="h-4 w-4 mr-2" />
             API Docs
           </Link>
+
+          {isAuthenticated ? (
+            <Link to="/admin" className={linkClasses('/admin')}>
+              <Upload className="h-4 w-4 mr-2" />
+              Admin
+            </Link>
+          ) : (
+            <button
+              onClick={() => loginWithRedirect()}
+              className="flex items-center px-4 py-2 text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+            >
+              Login
+            </button>
+          )}
         </nav>
 
         <button
@@ -80,16 +92,6 @@ const Navbar = () => {
             </p>
           </Link>
           <Link
-            to="/admin"
-            className={mobileLinkClasses('/admin')}
-            onClick={() => setIsOpen(false)}
-          >
-            <p className="flex items-center">
-              <Upload className="h-4 w-4 mr-2" />
-              Admin
-            </p>
-          </Link>
-          <Link
             to="/api-docs"
             className={mobileLinkClasses('/api-docs')}
             onClick={() => setIsOpen(false)}
@@ -99,6 +101,29 @@ const Navbar = () => {
               API Docs
             </p>
           </Link>
+
+          {isAuthenticated ? (
+            <Link
+              to="/admin"
+              className={mobileLinkClasses('/admin')}
+              onClick={() => setIsOpen(false)}
+            >
+              <p className="flex items-center">
+                <Upload className="h-4 w-4 mr-2" />
+                Admin
+              </p>
+            </Link>
+          ) : (
+            <button
+              onClick={() => {
+                setIsOpen(false);
+                loginWithRedirect();
+              }}
+              className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white bg-blue-600 hover:bg-blue-700"
+            >
+              Login
+            </button>
+          )}
         </nav>
       )}
     </nav>
