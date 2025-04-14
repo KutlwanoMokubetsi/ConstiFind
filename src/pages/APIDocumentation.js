@@ -1,5 +1,5 @@
 import React from 'react';
-import { Code, ChevronRight, ExternalLink } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 
 const APIDocumentation = () => {
   return (
