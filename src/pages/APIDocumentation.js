@@ -127,28 +127,7 @@ const APIDocumentation = () => {
         </section>
       </section>
 
-      <aside className="mt-12 bg-blue-50 rounded-lg p-6" aria-label="Developer Resources">
-        <div className="flex items-start">
-          <span className="flex-shrink-0">
-            <Code className="h-5 w-5 text-blue-500" />
-          </span>
-          <div className="ml-3">
-            <h3 className="text-lg font-medium text-blue-800">Developer Resources</h3>
-            <p className="mt-1 text-blue-700">
-              Check out our Postman collection and client libraries to get started quickly.
-            </p>
-            <nav className="mt-4">
-              <a
-                href="#"
-                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-blue-700 bg-blue-100 hover:bg-blue-200"
-              >
-                <ExternalLink className="h-4 w-4 mr-2" />
-                Postman Collection
-              </a>
-            </nav>
-          </div>
-        </div>
-      </aside>
+      
     </main>
   );
 };
