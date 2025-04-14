@@ -5,9 +5,12 @@ import FileUpload from '../components/admin/FileUpload';
 import FileTable from '../components/admin/FileTable';
 import EditMetadataModal from '../components/admin/EditMetadataModal';
 import { useFileManagement } from '../hooks/useFileManagement';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const AdminPage = () => {
   const navigate = useNavigate();
+  const { logout } = useAuth0();
+
   const {
     files,
     selectedFile,
@@ -19,16 +22,14 @@ const AdminPage = () => {
   } = useFileManagement();
 
   const handleSignOut = () => {
-    // Mock implementation - in real app, this would call an auth service
-    console.log('Signing out...');
-    navigate('/');
+    logout({ returnTo: window.location.origin });
   };
 
   return (
     <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <article className="bg-white rounded-lg shadow p-6">
         <AdminHeader onSignOut={handleSignOut} />
-        
+
         {/* File Upload Section */}
         <section aria-labelledby="file-upload-heading">
           <h2 id="file-upload-heading" className="sr-only">File Upload</h2>
@@ -61,3 +62,4 @@ const AdminPage = () => {
 };
 
 export default AdminPage;
+inPage;
