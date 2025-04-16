@@ -58,7 +58,7 @@ const FileUpload = ({ onFileSelect }) => {
     setSelectedFiles(updatedFiles);
   };
 
-  const handleUpload = () => {
+  /*const handleUpload = () => {
     if (selectedFiles.some(file => !file.isValid)) return;
     
     const filesToUpload = selectedFiles.map(item => ({
@@ -68,6 +68,26 @@ const FileUpload = ({ onFileSelect }) => {
     onFileSelect(filesToUpload);
     setSelectedFiles([]);
   };
+  
+  incorrect way of handling file upload
+  
+  */
+  const handleUpload = () => {
+    if (selectedFiles.some(file => !file.isValid)) return;
+  
+    // Extract raw File objects
+    //const filesToUpload = selectedFiles.map(item => item.file);
+
+    const filesToUpload = selectedFiles.map((item) => ({
+      file: item.file,
+      metadata: item.metadata, 
+    }));
+
+    onFileSelect(filesToUpload);
+  
+    setSelectedFiles([]);
+  };
+  
 
   // New function to handle file deletion
   const handleFileDelete = (index) => {
