@@ -24,3 +24,4 @@ yarn-error.log*
 .azure
 
 *.env
+admin_backend/.env
