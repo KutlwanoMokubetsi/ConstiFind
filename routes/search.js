@@ -26,7 +26,18 @@ router.get("/", async (req, res) => {
 
     // Query the Metadata collection
     const results = await Metadata.find(query).sort({ uploadedAt: -1 }).limit(50);
-    res.json(results);
+
+    // Format the response to match frontend expectations
+    const formattedResults = results.map(doc => ({
+      id: doc._id,
+      title: doc.fileName?.split("/").pop() || "Untitled",
+      excerpt: doc.description || "No description available",
+      type: doc.category || "Unknown",
+      relevance: doc.tags?.join(", ") || "", // optional tag display
+      uploadedAt: doc.uploadedAt,
+    }));
+
+    res.json(formattedResults);
   } catch (err) {
     console.error("Search error:", err);
     res.status(500).json({ error: "Internal Server Error" });
