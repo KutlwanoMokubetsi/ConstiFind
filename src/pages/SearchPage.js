@@ -4,20 +4,25 @@ import SearchResults from '../components/search/SearchResults';
 
 const SearchPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedTags, setSelectedTags] = useState([]);
   const [hasSearched, setHasSearched] = useState(false);
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const handleSearch = async () => {
-    if (!searchQuery.trim()) return;
+    if (!searchQuery.trim() && selectedTags.length === 0) return;
 
     setLoading(true);
     setHasSearched(true);
     setError(null);
 
     try {
-      const response = await fetch(`http://localhost:5000/api/search?q=${encodeURIComponent(searchQuery)}`);
+      const query = new URLSearchParams();
+      if (searchQuery.trim()) query.append('q', searchQuery.trim());
+      if (selectedTags.length > 0) query.append('tags', selectedTags.join(','));
+
+      const response = await fetch(`http://localhost:5000/api/search?${query.toString()}`);
       if (!response.ok) throw new Error('Search failed');
       const data = await response.json();
       setResults(data);
@@ -39,6 +44,8 @@ const SearchPage = () => {
       <SearchHeader 
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
+        selectedTags={selectedTags}
+        setSelectedTags={setSelectedTags}
         handleSearch={handleSearch}
         handleKeyDown={handleKeyDown}
       />
