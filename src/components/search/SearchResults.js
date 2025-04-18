@@ -24,7 +24,7 @@ const SearchResults = ({ searchQuery, results }) => {
     ),
     results.length === 0
       ? React.createElement('p', { className: 'text-gray-500 text-center' }, 'No results found.')
-      : React.createElement('div', { className: 'space-y-4' },
+      : React.createElement('div', { className: 'space-y-4' },console.log('Search results:', results),
           results.map(result =>
             React.createElement(ResultCard, {
               key: result._id || result.id || Math.random(), // fallback for missing ID
