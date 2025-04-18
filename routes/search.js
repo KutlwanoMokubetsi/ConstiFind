@@ -6,9 +6,9 @@ const Metadata = require("../models/Metadata"); // adjust path if needed
 router.get("/", async (req, res) => {
   try {
     const { q, tags } = req.query;
-
     const query = {};
 
+    // Searching in the 'fileName', 'description', 'category', and 'uploadedBy' fields
     if (q) {
       query.$or = [
         { fileName: { $regex: q, $options: "i" } },
@@ -18,11 +18,13 @@ router.get("/", async (req, res) => {
       ];
     }
 
+    // Handling the 'tags' array query
     if (tags) {
       const tagArray = tags.split(",").map(tag => tag.trim());
       query.tags = { $in: tagArray };
     }
 
+    // Query the Metadata collection
     const results = await Metadata.find(query).sort({ uploadedAt: -1 }).limit(50);
     res.json(results);
   } catch (err) {
