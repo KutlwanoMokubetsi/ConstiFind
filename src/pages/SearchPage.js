@@ -54,7 +54,7 @@ const SearchPage = () => {
       {error && <p className="text-center text-red-500 mt-4">{error}</p>}
 
       {hasSearched && !loading && !error && (
-        <SearchResults results={results} />
+        <SearchResults results={results} searchQuery={searchQuery} />
       )}
     </div>
   );
