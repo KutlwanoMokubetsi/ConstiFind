@@ -1,31 +1,29 @@
-import React, { memo } from 'react';
-import SearchResultItem from './SearchResultItem';
-import Filters from './Filters';
+const React = require('react');
+const { Filter } = require('lucide-react');
+const ResultCard = require('./ResultCard');
 
 const SearchResults = ({ searchQuery, results }) => {
-  return (
-    <section className="max-w-4xl mx-auto">
-      <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-        <h2 className="text-2xl font-semibold text-gray-900">
-          Search Results for "{searchQuery}"
-        </h2>
-        {/* Filters are mock-only - will connect to real data later */}
-        <Filters />
-      </header>
-
-      <section className="space-y-4">
-        {results.length > 0 ? (
-          results.map((result) => (
-            <SearchResultItem key={result.id} result={result} />
-          ))
-        ) : (
-          <section className="text-center py-12">
-            <p className="text-gray-500">No results found for your search. Try different keywords.</p>
-          </section>
-        )}
-      </section>
-    </section>
+  return React.createElement('div', { className: 'max-w-4xl mx-auto' },
+    React.createElement('div', { className: 'flex items-center justify-between mb-6' },
+      React.createElement('h2', { className: 'text-2xl font-semibold text-gray-900' }, `Search Results for "${searchQuery}"`),
+      React.createElement('div', { className: 'flex items-center space-x-4 text-sm' },
+        React.createElement('span', { className: 'flex items-center text-gray-600' },
+          React.createElement(Filter, { className: 'h-4 w-4 mr-1' }),
+          'Filters:'
+        ),
+        React.createElement('select', { className: 'border rounded-lg px-3 py-1.5 text-gray-600 bg-white shadow-sm' },
+          React.createElement('option', null, 'All Types'),
+          React.createElement('option', null, 'PDF'),
+          React.createElement('option', null, 'Document')
+        )
+      )
+    ),
+    React.createElement('div', { className: 'space-y-4' },
+      results.map(result => 
+        React.createElement(ResultCard, { key: result.id, result: result })
+      )
+    )
   );
 };
 
-export default memo(SearchResults);
+module.exports = SearchResults;
