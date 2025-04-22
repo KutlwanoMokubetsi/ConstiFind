@@ -22,3 +22,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .azure
+
+*.env
+admin_backend/.env
+!*.env.example

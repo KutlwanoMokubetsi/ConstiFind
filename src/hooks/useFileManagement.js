@@ -1,4 +1,5 @@
 import { useState } from 'react';
+const API_URL = process.env.REACT_APP_BACKEND_URL;
 
 export const useFileManagement = () => {
   // Mock data for demonstration
@@ -41,19 +42,66 @@ export const useFileManagement = () => {
   const [files, setFiles] = useState(initialFiles);
   const [selectedFile, setSelectedFile] = useState(null);
 
-  const handleFileUpload = (newFiles) => {
-    const newFileData = newFiles.map((file, index) => ({
-      id: files.length + index + 1,
-      name: file.name,
-      type: file.type.split('/')[1]?.toUpperCase() || 'UNKNOWN',
-      size: `${(file.size / (1024 * 1024)).toFixed(1)} MB`,
-      date: new Date().toISOString().split('T')[0],
-      category: '',
-      description: '',
-      tags: [],
-      path: '/'
-    }));
-    setFiles([...newFileData, ...files]);
+  const handleFileUpload = async (fileObjects) => {
+    for (const item of fileObjects) {
+      const { file, metadata } = item;
+  
+      const formData = new FormData();
+      formData.append('files', file);
+      formData.append('category', metadata.category);  
+      formData.append('description', metadata.description || '');
+      formData.append('tags', JSON.stringify(metadata.tags || []));
+      formData.append('uploadedBy', metadata.uploadedBy || '');
+      
+      const uploadUrl = `${API_URL}/upload?category=${encodeURIComponent(metadata.category)}`;
+
+
+      try {
+        const uploadRes = await fetch(uploadUrl, {
+          method: 'POST',
+          body: formData,
+        });
+  
+        const uploadData = await uploadRes.json();
+        const uploadedFile = uploadData.files[0];
+  
+        await handleMetadataUpload(metadata, uploadedFile.blobName, file);
+      } catch (error) {
+        console.error('Upload error:', error);
+      }
+    }
+  };
+  
+  
+  const handleMetadataUpload = async (metadata, fileUrl, file) => {
+    const metadataPayload = {
+      ...metadata,
+       
+      fileName: fileUrl,
+      fileSize: file.size,
+      fileType: file.type,
+      category: metadata.category,
+    };
+  
+    console.log("Sending metadata:", metadataPayload); 
+  
+    try {
+      const metadataRes = await fetch(`${API_URL}/upload/metadata`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(metadataPayload),
+      });
+  
+      if (!metadataRes.ok) {
+        throw new Error('Metadata upload failed');
+      }
+  
+      const metadataData = await metadataRes.json();
+      console.log('Metadata upload complete:', metadataData);
+  
+    } catch (error) {
+      console.error('Metadata upload error:', error);
+    }
   };
 
   const handleFileEdit = (id) => {
