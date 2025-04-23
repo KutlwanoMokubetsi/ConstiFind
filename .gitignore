@@ -23,6 +23,8 @@ yarn-debug.log*
 yarn-error.log*
 .azure
 
-*.env
+# Ignore only the .env in admin_backend
 admin_backend/.env
-!*.env.example
+
+# Allow all other .env files
+!*.env

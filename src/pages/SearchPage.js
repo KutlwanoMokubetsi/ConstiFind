@@ -22,7 +22,7 @@ const SearchPage = () => {
       if (searchQuery.trim()) query.append('q', searchQuery.trim());
       if (selectedTags.length > 0) query.append('tags', selectedTags.join(','));
 
-      const response = await fetch(`http://localhost:5000/api/search?${query.toString()}`);
+      const response = await fetch(`${process.env.REACT_APP_SEARCH_BACKEND_URL}/api/search?${query.toString()}`);
       if (!response.ok) throw new Error('Search failed');
       const data = await response.json();
       setResults(data);
