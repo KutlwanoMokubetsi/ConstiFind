@@ -60,11 +60,12 @@ const FileUpload = ({ onFileSelect }) => {
 
   const handleUpload = () => {
     if (selectedFiles.some(file => !file.isValid)) return;
-    
-    const filesToUpload = selectedFiles.map(item => ({
-      ...item.file,
-      metadata: item.metadata
+  
+    const filesToUpload = selectedFiles.map((item) => ({
+      file: item.file,
+      metadata: item.metadata, 
     }));
+
     onFileSelect(filesToUpload);
     setSelectedFiles([]);
   };
