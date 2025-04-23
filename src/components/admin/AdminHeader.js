@@ -4,7 +4,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const AdminHeader = () => {
-  const { logout, user } = useAuth0();
+  const { logout } = useAuth0();
   const navigate = useNavigate();
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
