@@ -32,11 +32,14 @@ const SearchPage = () => {
       setResults([]);
     } finally {
       setLoading(false);
+
     }
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter') handleSearch();
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
   };
 
   return (
@@ -55,9 +58,11 @@ const SearchPage = () => {
 
       {hasSearched && !loading && !error && (
         <SearchResults results={results} searchQuery={searchQuery} />
+
       )}
     </div>
   );
 };
 
 export default SearchPage;
+

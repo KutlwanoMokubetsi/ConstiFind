@@ -95,9 +95,49 @@ const HomePage = () => {
             </article>
           </li>
         </ul>
+
       </section>
     </main>
   );
 };
+
+const FeatureCard = ({ iconSrc, alt, title, description, linkTo, linkText, onClick }) => (
+  <motion.article 
+    className="bg-white bg-opacity-90 backdrop-blur-sm text-gray-900 rounded-2xl shadow-xl p-6 flex flex-col space-y-3 hover:scale-105 transition-transform duration-300"
+    whileHover={{ scale: 1.05 }}
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    role="region"
+    aria-labelledby={title.replace(/\s/g, '-').toLowerCase()}
+  >
+    <header className="flex items-center space-x-4">
+      <div className="p-3 bg-blue-100 rounded-full shadow-lg transform rotate-3">
+        <img src={iconSrc} alt={alt} className="h-10 w-10 object-contain" />
+      </div>
+      <h2 id={title.replace(/\s/g, '-').toLowerCase()} className="text-xl font-semibold">{title}</h2>
+    </header>
+
+    <p className="text-sm text-gray-700">{description}</p>
+
+    {linkText && (
+      onClick ? (
+        <button
+          onClick={onClick}
+          className="mt-2 self-start text-white text-sm bg-gray-700 hover:bg-gray-800 px-4 py-2 rounded-md"
+        >
+          {linkText}
+        </button>
+      ) : (
+        <Link
+          to={linkTo}
+          className="mt-2 self-start text-white text-sm bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md"
+        >
+          {linkText}
+        </Link>
+      )
+    )}
+  </motion.article>
+);
 
 export default HomePage;

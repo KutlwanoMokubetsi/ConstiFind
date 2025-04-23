@@ -102,6 +102,7 @@ export const useFileManagement = () => {
     } catch (error) {
       console.error('Metadata upload error:', error);
     }
+
   };
 
   const handleFileEdit = (id) => {

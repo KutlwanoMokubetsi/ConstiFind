@@ -67,7 +67,6 @@ const FileUpload = ({ onFileSelect }) => {
     }));
 
     onFileSelect(filesToUpload);
-  
     setSelectedFiles([]);
   };
 

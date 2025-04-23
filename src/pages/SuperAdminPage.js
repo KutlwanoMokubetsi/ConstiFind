@@ -1,4 +1,3 @@
-// src/pages/SuperAdminPage.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Shield, Users, ChevronLeft, CheckCircle2, XCircle, Clock } from 'lucide-react';
@@ -53,8 +52,8 @@ const SuperAdminPage = () => {
   return (
     <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <article className="bg-white rounded-lg shadow p-6">
-        <header className="flex justify-between items-center mb-8">
-          <div>
+        <header className="mb-8">
+          <nav>
             <button 
               onClick={() => navigate('/admin')}
               className="flex items-center text-indigo-600 hover:text-indigo-800 mb-2"
@@ -62,11 +61,12 @@ const SuperAdminPage = () => {
               <ChevronLeft className="h-5 w-5 mr-1" />
               Back to Admin Dashboard
             </button>
-            <h1 className="text-2xl font-bold text-gray-900 flex items-center">
-              <Shield className="h-8 w-8 text-indigo-600 mr-2" />
-              Admin Management
-            </h1>
-          </div>
+
+          </nav>
+          <h1 className="text-2xl font-bold text-gray-900 flex items-center">
+            <Shield className="h-8 w-8 text-indigo-600 mr-2" />
+            Admin Management
+          </h1>
         </header>
 
         {/* Pending Requests Section */}
@@ -77,58 +77,60 @@ const SuperAdminPage = () => {
           </h2>
           
           {pendingRequests.length > 0 ? (
-            <div className="bg-white shadow rounded-lg overflow-hidden">
-              <table className="min-w-full divide-y divide-gray-200">
+
+            <figure className="overflow-x-auto">
+              <table className="min-w-full bg-white shadow rounded-lg overflow-hidden">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Applicant</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Request Date</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Applicant</th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Request Date</th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {pendingRequests.map((request) => (
                     <tr key={request.id} className="hover:bg-gray-50">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{request.name}</td>
+
+                      <th scope="row" className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{request.name}</th>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{request.email}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{request.requestDate}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        <div className="flex space-x-2">
-                          <button
-                            onClick={() => handleApprove(request.id)}
-                            className="text-green-600 hover:text-green-800 p-1 rounded-full hover:bg-green-50"
-                            title="Approve"
-                          >
-                            <CheckCircle2 className="h-5 w-5" />
-                          </button>
-                          <button
-                            onClick={() => handleReject(request.id)}
-                            className="text-red-600 hover:text-red-800 p-1 rounded-full hover:bg-red-50"
-                            title="Reject"
-                          >
-                            <XCircle className="h-5 w-5" />
-                          </button>
-                        </div>
+                        <menu className="flex space-x-2">
+                          <li>
+                            <button
+                              onClick={() => handleApprove(request.id)}
+                              className="text-green-600 hover:text-green-800 p-1 rounded-full hover:bg-green-50"
+                              title="Approve"
+                            >
+                              <CheckCircle2 className="h-5 w-5" />
+                              <span className="sr-only">Approve {request.name}</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button
+                              onClick={() => handleReject(request.id)}
+                              className="text-red-600 hover:text-red-800 p-1 rounded-full hover:bg-red-50"
+                              title="Reject"
+                            >
+                              <XCircle className="h-5 w-5" />
+                              <span className="sr-only">Reject {request.name}</span>
+                            </button>
+                          </li>
+                        </menu>
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
-            </div>
+            </figure>
           ) : (
-            <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4">
-              <div className="flex">
-                <div className="flex-shrink-0">
-                  <Clock className="h-5 w-5 text-yellow-400" />
-                </div>
-                <div className="ml-3">
-                  <p className="text-sm text-yellow-700">
-                    No pending admin requests at this time.
-                  </p>
-                </div>
-              </div>
-            </div>
+            <aside className="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+              <p className="text-sm text-yellow-700 flex items-center">
+                <Clock className="h-5 w-5 text-yellow-400 mr-2" />
+                No pending admin requests at this time.
+              </p>
+            </aside>
           )}
         </section>
 
@@ -139,26 +141,27 @@ const SuperAdminPage = () => {
             Current Admins
           </h2>
           
-          <div className="bg-white shadow rounded-lg overflow-hidden">
-            <table className="min-w-full divide-y divide-gray-200">
+          <figure className="overflow-x-auto">
+            <table className="min-w-full bg-white shadow rounded-lg overflow-hidden">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Active</th>
+                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Active</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {admins.map((admin) => (
                   <tr key={admin.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{admin.name}</td>
+
+                    <th scope="row" className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{admin.name}</th>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{admin.email}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{admin.lastActive}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
-          </div>
+          </figure>
         </section>
       </article>
     </main>
