@@ -61,6 +61,7 @@ const SuperAdminPage = () => {
               <ChevronLeft className="h-5 w-5 mr-1" />
               Back to Admin Dashboard
             </button>
+
           </nav>
           <h1 className="text-2xl font-bold text-gray-900 flex items-center">
             <Shield className="h-8 w-8 text-indigo-600 mr-2" />
@@ -76,6 +77,7 @@ const SuperAdminPage = () => {
           </h2>
           
           {pendingRequests.length > 0 ? (
+
             <figure className="overflow-x-auto">
               <table className="min-w-full bg-white shadow rounded-lg overflow-hidden">
                 <thead className="bg-gray-50">
@@ -89,6 +91,7 @@ const SuperAdminPage = () => {
                 <tbody className="bg-white divide-y divide-gray-200">
                   {pendingRequests.map((request) => (
                     <tr key={request.id} className="hover:bg-gray-50">
+
                       <th scope="row" className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{request.name}</th>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{request.email}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{request.requestDate}</td>
@@ -150,6 +153,7 @@ const SuperAdminPage = () => {
               <tbody className="bg-white divide-y divide-gray-200">
                 {admins.map((admin) => (
                   <tr key={admin.id} className="hover:bg-gray-50">
+
                     <th scope="row" className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{admin.name}</th>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{admin.email}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{admin.lastActive}</td>

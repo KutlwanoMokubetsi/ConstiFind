@@ -1,67 +1,38 @@
 import { useState } from 'react';
-import { BookOpen, FileText } from 'lucide-react';
 import SearchHeader from '../components/search/SearchHeader';
-import FeatureCards from '../components/search/FeatureCards';
 import SearchResults from '../components/search/SearchResults';
 
 const SearchPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedTags, setSelectedTags] = useState([]);
   const [hasSearched, setHasSearched] = useState(false);
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const mockResults = [
-    {
-      id: 1,
-      title: 'Constitution of India - 1947',
-      excerpt: 'The Constitution of India is the supreme law of India. The document lays down the framework that demarcates fundamental political code, structure, procedures, powers, and duties...',
-      type: 'PDF',
-      relevance: '98%',
-      icon: <BookOpen className="h-5 w-5 text-blue-500" />,
-    },
-    {
-      id: 2,
-      title: 'Constitutional Amendments 2020',
-      excerpt: 'Recent amendments to the constitution including changes to citizenship laws and administrative reforms...',
-      type: 'Document',
-      relevance: '95%',
-      icon: <FileText className="h-5 w-5 text-green-500" />,
-    },
-    {
-      id: 3,
-      title: 'Historical Constitutional Notes',
-      excerpt: 'Comprehensive analysis of the constitutional development including historical context and implementation challenges...',
-      type: 'PDF',
-      relevance: '92%',
-      icon: <BookOpen className="h-5 w-5 text-blue-500" />,
-    },
-    {
-      id: 4,
-      title: 'Judicial Interpretations Vol. 12',
-      excerpt: 'Landmark Supreme Court judgments interpreting constitutional provisions with case studies...',
-      type: 'PDF',
-      relevance: '90%',
-      icon: <BookOpen className="h-5 w-5 text-blue-500" />,
-    },
-    {
-      id: 5,
-      title: 'Comparative Constitutional Law',
-      excerpt: 'Analysis comparing Indian constitutional provisions with other Commonwealth nations...',
-      type: 'Document',
-      relevance: '88%',
-      icon: <FileText className="h-5 w-5 text-green-500" />,
-    },
-    {
-      id: 6,
-      title: 'Fundamental Rights Handbook',
-      excerpt: 'Practical guide to fundamental rights enforcement with procedural guidelines...',
-      type: 'PDF',
-      relevance: '85%',
-      icon: <BookOpen className="h-5 w-5 text-blue-500" />,
-    }
-  ];
+  const handleSearch = async () => {
+    if (!searchQuery.trim() && selectedTags.length === 0) return;
 
-  const handleSearch = () => {
-    if (searchQuery.trim()) {
-      setHasSearched(true);
+    setLoading(true);
+    setHasSearched(true);
+    setError(null);
+
+    try {
+      const query = new URLSearchParams();
+      if (searchQuery.trim()) query.append('q', searchQuery.trim());
+      if (selectedTags.length > 0) query.append('tags', selectedTags.join(','));
+
+      const response = await fetch(`${process.env.REACT_APP_SEARCH_BACKEND_URL}/api/search?${query.toString()}`);
+      if (!response.ok) throw new Error('Search failed');
+      const data = await response.json();
+      setResults(data);
+    } catch (err) {
+      console.error('Search failed:', err);
+      setError('Something went wrong while searching.');
+      setResults([]);
+    } finally {
+      setLoading(false);
+
     }
   };
 
@@ -76,20 +47,22 @@ const SearchPage = () => {
       <SearchHeader 
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
+        selectedTags={selectedTags}
+        setSelectedTags={setSelectedTags}
         handleSearch={handleSearch}
         handleKeyDown={handleKeyDown}
       />
-      
-      {!hasSearched ? (
-        <FeatureCards />
-      ) : (
-        <SearchResults 
-          searchQuery={searchQuery} 
-          results={mockResults} 
-        />
+
+      {loading && <p className="text-center text-gray-500 mt-4">Searching...</p>}
+      {error && <p className="text-center text-red-500 mt-4">{error}</p>}
+
+      {hasSearched && !loading && !error && (
+        <SearchResults results={results} searchQuery={searchQuery} />
+
       )}
     </div>
   );
 };
 
 export default SearchPage;
+
