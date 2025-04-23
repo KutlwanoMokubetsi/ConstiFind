@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Search, Upload, Code } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react'; // Import the useAuth0 hook
